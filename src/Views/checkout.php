@@ -5,6 +5,9 @@ $shippingCost = $data['shipping_cost'];
 
 // @todo: Calculate the subtotal from the products array
 $subtotal = 0;
+foreach ($products as $product) {
+    $subtotal += $product['price'] * $product['qty'];
+}
 $total = $subtotal + $shippingCost;
 ?>
 
