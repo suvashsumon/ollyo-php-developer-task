@@ -1,3 +1,11 @@
+# Setup Guide
+You need to run `ngrok` on your system which should point to this application's url. Then go to `/src/Controllers/PaymentController.php` file and update the follwing with your own information:
+```
+private $baseUrl = "your ngrok public url...do not use / at end";
+private $clientSecret = "update with your paypal client secret";
+private $clientId = "update with your paypal client id";
+```
+
 # PHP Task: Shopping Cart Checkout System
 
 ## Overview

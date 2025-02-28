@@ -87,6 +87,10 @@ Routes::get('/success', function () {
     }
 });
 
+Routes::get('/payment-failed', function () {
+    return view('payment-failed', []);
+});
+
 // Register thank you & payment failed routes with corresponding views here.
 
 $route = Routes::getInstance();

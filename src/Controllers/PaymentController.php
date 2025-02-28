@@ -16,13 +16,16 @@ use Exception;
 class PaymentController
 {
     private $apiContext;
+    private $baseUrl = "https://9530-37-111-193-180.ngrok-free.app";
+    private $clientSecret = "update with your paypal client secret";
+    private $clientId = "update with your paypal client id";
 
     public function __construct()
     {
         $this->apiContext = new ApiContext(
             new OAuthTokenCredential(
-                'Aa80mgHcy-GYgDRrVTNVT65_P5gySZRDgFMsnutyBhN2OwiZhpIoU_YpvJA4KerSe3t_f04ZeipVMYa8', // Replace with your PayPal client ID
-                'ECPz9x58JWFpCjQkubmDv4mjjS8XrLHTfE30mxuHmZhO09xHBUK5HiuMeLTfW9uMFO-dfhIwFyOLVvuc'     // Replace with your PayPal secret key
+                $this->clientId,
+                $this->clientSecret
             )
         );
         $this->apiContext->setConfig([
@@ -59,8 +62,8 @@ class PaymentController
                     ->setDescription('Product Purchase');
 
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl('https://9530-37-111-193-180.ngrok-free.app/success')  
-                     ->setCancelUrl('https://9530-37-111-193-180.ngrok-free.app/cancel');  
+        $redirectUrls->setReturnUrl($this->baseUrl.'/success')  
+                     ->setCancelUrl($this->baseUrl.'/payment-failed');  
 
         $payment = new Payment();
         $payment->setIntent('sale') 
