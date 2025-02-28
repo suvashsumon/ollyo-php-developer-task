@@ -67,13 +67,24 @@ Routes::post('/checkout', function ($request) {
 
     // Consider creating a dedicated controller class to handle payment processing
     // This helps separate payment logic from routing and keeps code organized
-    print_r($request);
     $paymentController = new PaymentController();
     $paymentController->createPayment($request);
 });
 
 Routes::get('/success', function () {
-    return "Thank you for your purchase!";
+    if (isset($_GET['paymentId']) && isset($_GET['PayerID'])) {
+        $paymentId = $_GET['paymentId'];
+        $payerId = $_GET['PayerID'];
+        $token = $_GET['token'];
+
+        $data = [
+            'paymentId' => $paymentId,
+            'payerId' => $payerId,
+            'token' => $token
+        ];
+        
+        return view('thank-you', $data);
+    }
 });
 
 // Register thank you & payment failed routes with corresponding views here.

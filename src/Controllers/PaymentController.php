@@ -40,12 +40,11 @@ class PaymentController
                   ->setFirstName($data['name'])
                   ->setPayerId($data['email']);
 
-        // Create and set the ShippingAddress object properly
         $shippingAddress = new \PayPal\Api\Address();
-        $shippingAddress->setLine1($data['address']) // Address line 1
-                        ->setCity($data['city']) // City
-                        ->setPostalCode($data['post_code']) // Postal code
-                        ->setCountryCode('GB'); // Country code (use 'GB' for UK, or adjust accordingly)
+        $shippingAddress->setLine1($data['address'])
+                        ->setCity($data['city'])
+                        ->setPostalCode($data['post_code'])
+                        ->setCountryCode('GB');
 
         $payerInfo->setShippingAddress($shippingAddress);
 
@@ -60,8 +59,8 @@ class PaymentController
                     ->setDescription('Product Purchase');
 
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl('https://9530-37-111-193-180.ngrok-free.app//success')  
-                     ->setCancelUrl('https://9530-37-111-193-180.ngrok-free.app//cancel');  
+        $redirectUrls->setReturnUrl('https://9530-37-111-193-180.ngrok-free.app/success')  
+                     ->setCancelUrl('https://9530-37-111-193-180.ngrok-free.app/cancel');  
 
         $payment = new Payment();
         $payment->setIntent('sale') 
@@ -80,19 +79,4 @@ class PaymentController
         }
     }
 
-    public function executePayment($paymentId, $payerId)
-    {
-        $payment = Payment::get($paymentId, $this->apiContext);
-
-        $execution = new PaymentExecution();
-        $execution->setPayerId($payerId);
-
-        try {
-            $result = $payment->execute($execution, $this->apiContext);
-            return $result;
-        } catch (Exception $ex) {
-            error_log('PayPal API Execution Error: ' . $ex->getMessage());
-            die('Error occurred while executing payment: ' . $ex->getMessage());
-        }
-    }
 }
