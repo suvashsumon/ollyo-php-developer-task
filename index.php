@@ -1,6 +1,7 @@
 <?php
 
 use Ollyo\Task\Routes;
+use Ollyo\Task\Controllers\PaymentController;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/helper.php';
@@ -66,6 +67,13 @@ Routes::post('/checkout', function ($request) {
 
     // Consider creating a dedicated controller class to handle payment processing
     // This helps separate payment logic from routing and keeps code organized
+    print_r($request);
+    $paymentController = new PaymentController();
+    $paymentController->createPayment($request);
+});
+
+Routes::get('/success', function () {
+    return "Thank you for your purchase!";
 });
 
 // Register thank you & payment failed routes with corresponding views here.

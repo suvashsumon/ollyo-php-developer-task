@@ -61,6 +61,7 @@ $total = $subtotal + $shippingCost;
                     <div class="font-semibold flex items-center justify-between">
                         <p>Total</p>
                         <p>$<?php echo $total; ?></p>
+                        <input type="hidden" name="total" value="<?php echo $total; ?>">
                     </div>
                     <button class="inline-flex w-full items-center justify-center gap-2 text-sm font-medium whitespace-nowrap rounded-md transition-colors ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-gray-800 text-white hover:bg-gray-700/90 h-9 px-4 py-2">Place Order</button>
                 </div>
