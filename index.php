@@ -72,4 +72,5 @@ Routes::post('/checkout', function ($request) {
 
 $route = Routes::getInstance();
 $route->dispatch();
+// var_dump($route->getRoutes());
 ?>
